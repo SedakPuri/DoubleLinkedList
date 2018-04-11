@@ -102,6 +102,26 @@ public class DLList<E>
 
 	}
 	
+	public void reverse() {
+		//Swapping the header and trailer using a temp variable so you don't lose either reference
+		Node<E> temp = header;			 
+		header = trailer; 				
+		trailer = temp; 					
+							
+		//Starting your current at the header (which used to be the trailer)
+		Node<E> current = header; 	
+		while(current != null) 	//Breaks out when you reach the end sentinel of the list (or the old beginning of the list)	
+		{ 					
+			//Swapping the next with the previous for every node using the same temp variable
+			temp = current.next; 		
+			current.next = current.prev; 
+			current.prev = temp; 
+			
+			//Advancing the current
+			current = current.next;		
+		}
+	}
+	
 	private static class Node<T>
 	{
 		private T value;
